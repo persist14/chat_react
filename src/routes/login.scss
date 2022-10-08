@@ -1,0 +1,90 @@
+
+.login_container{
+  width: 100%;
+  height: 100%;
+  background: url('../assets/image/login-bg.jpg') repeat center center;
+  background-size: cover;
+  &::before {
+    content: '';
+    display: table;
+  }
+  .login_logo {
+    margin: 30px 0 0 20px;
+    width: 121px;
+    height: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    img {
+      width: 32px;
+      height: 32px;
+    }
+    p {
+      color: #fff;
+      font-family: "Arial Rounded MT Bold";
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 2px;
+    }
+  }
+  .login_description {
+    width: 434px;
+    height: 143px;
+    margin: 121px 0 0 234px;
+    //background-color: #fff;
+    font-size: 30px;
+    letter-spacing: 5px;
+    color: #fff;
+    line-height: 40px;
+  }
+  .login_box {
+    width: 478px;
+    height: 653px;
+    background-color: #fff;
+    position: absolute;
+    right: 200px;
+    top: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+    box-sizing: border-box;
+    padding: 46px;
+    .card_title {
+      font-size: 30px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+    .register {
+      color: #ADB2B8;
+      margin-top: 20px;
+      span {
+        color: #009DFF;
+        cursor: pointer;
+      }
+    }
+    .card_content {
+      width: 250px;
+      height: 44px;
+      background-color: #F3F7FB;
+      margin-top: 53px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      position: relative;
+      p {
+        color: #828A96;
+        z-index: 10;
+        font-size: 14px;
+      }
+      .tab_thumb {
+        position: absolute;
+        left: 8px;
+        width: 120px;
+        height: 35px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 3px rgba(0 ,0,0 , .2);
+      }
+    }
+  }
+}
