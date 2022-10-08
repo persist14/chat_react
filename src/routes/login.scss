@@ -4,6 +4,7 @@
   height: 100%;
   background: url('../assets/image/login-bg.jpg') repeat center center;
   background-size: cover;
+  overflow: hidden;
   &::before {
     content: '';
     display: table;
@@ -75,6 +76,7 @@
         color: #828A96;
         z-index: 10;
         font-size: 14px;
+        cursor: pointer;
       }
       .tab_thumb {
         position: absolute;
