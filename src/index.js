@@ -1,5 +1,6 @@
 import dva from 'dva';
 import './assets/index.scss';
+import 'antd/dist/antd.css';
 import { createBrowserHistory } from 'history'
 // 1. Initialize
 const app = dva({
