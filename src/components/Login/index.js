@@ -8,7 +8,7 @@ import userIcon from '../../assets/image/user.png'
 import userFocusIcon from '../../assets/image/user_focus.png'
 import userPwdIcon from '../../assets/image/password.png'
 import userFocusPwdIcon from '../../assets/image/password_focus.png'
-const ThumbComponent = ({ currentTab, setCurr }) => {
+const ThumbComponent = ({ currentTab, setCurr, tabText }) => {
 
   const [width, setWidth] = useState(120)
   const [ springs, api ] = useSpring(() => ({
@@ -18,7 +18,6 @@ const ThumbComponent = ({ currentTab, setCurr }) => {
   }))
   const switchTab = () => {
     setCurr(!currentTab)
-    console.log(currentTab);
     currentTab ? setWidth(120) : setWidth(105)
     api.start({
       to: {
@@ -28,8 +27,9 @@ const ThumbComponent = ({ currentTab, setCurr }) => {
   }
   return (
           <>
-          <p onClick={switchTab} > 手机验证码登录 </p>
-          <p onClick={switchTab} > 账号密码登录 </p>
+          {tabText.map(item => (<p onClick={switchTab} key={item} >{item}</p>))}
+          {/* <p onClick={switchTab} > 手机验证码登录 </p>
+          <p onClick={switchTab} > 账号密码登录 </p> */}
           <animated.div className={styles.tab_thumb} style={{ width: width + 'px' ,...springs}}  ></animated.div>
           </>
           )
@@ -86,7 +86,7 @@ const InputComponent = ({icon, iconFocus, alertText, inputType, top, getData}) =
 
           )
 }
-const Form = () => {
+const Form = ({title, tabText, onOk, btnText}) => {
   const [currentTab, setCurrentTab] = useState(false)
   const setCurr = (item) => {
     setCurrentTab(item)
@@ -113,7 +113,6 @@ const Form = () => {
     data.username = userInfo.current.value
     data.password = pwdInfo.current.value
     if(!data.username.length) {
-      console.log(111);
       message.error('请输入账号')
       return
     }
@@ -121,11 +120,12 @@ const Form = () => {
       message.error('请输入密码')
       return
     }
-//    dispatch(routerRedux.push('/'))
+    onOk(data)
   }
   const thumbProps = {
     currentTab,
-    setCurr
+    setCurr,
+    tabText
   }
   const [springs] = useSpring(() => ({
     from: {
@@ -144,7 +144,7 @@ const Form = () => {
   return (
           <>
           <animated.div className={styles.login_box} style={springs}  >
-            <p className={styles.card_title} >登录你的聊天账户</p>
+            <p className={styles.card_title} >{title}</p>
             <p className={styles.register} >没有账号？<span>立即注册</span></p>
             <div className={styles.card_content} >
               <ThumbComponent  {...thumbProps} />
@@ -159,7 +159,7 @@ const Form = () => {
             </div>
             {currentTab ? (
                     <div className={styles.login_submit} >
-                      <button onClick={btnClick} >登录</button>
+                      <button onClick={btnClick} >{btnText}</button>
                       <p className={styles.is_agree} >点击「登录」表示已阅读并同意 <span className={styles.rules} >服务条款</span></p>
                       <div className={styles.outer_login} >
                         <div>其他方式</div>

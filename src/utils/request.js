@@ -1,30 +1,34 @@
-import fetch from 'dva/fetch';
-
-function parseJSON(response) {
-  return response.json();
-}
-
-function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
+import axios from 'axios'
+import config from '../config'
+import { message } from 'antd'
+import { routerRedux } from 'dva/router'
+import store from '../index'
+import { add, query } from './localStorage'
+const { configs } = config
+const instance  = axios.create({
+  timeout: 100000,
+  baseURL: configs.BASE_URL,
+  // withCredentials: true
+})
+instance.interceptors.request.use(config => {
+  if (!config.url.includes('login')) {
+    let token = 'bearer ' + query('token')
+    config.headers.authorization = token
   }
-
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
-}
-
-/**
- * Requests a URL, returning a promise.
- *
- * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
- * @return {object}           An object containing either "data" or "err"
- */
-export default function request(url, options) {
-  return fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON)
-    .then(data => ({ data }))
-    .catch(err => ({ err }));
-}
+  config.url = 'web/' + config.url
+  return config
+}, (err) => {
+  console.log('errMsg',err)
+})
+instance.interceptors.response.use(config => {
+  return config.data
+}, (err) => {
+  const { status } = err.response
+  const { dispatch } = store
+  if(status === 401) {
+   message.error('token 无效')
+   dispatch(routerRedux.push('/login'))
+  }
+  // throw err
+})
+export default instance
