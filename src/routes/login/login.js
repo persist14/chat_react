@@ -2,8 +2,8 @@ import { connect } from 'dva'
 // import { useState } from 'react'
 import { routerRedux } from 'dva/router'
 import styles from './login.scss'
-import chatLogo from '../assets/image/chat_logo.png'
-import LoginForm from '../components/Login/'
+import chatLogo from '../../assets/image/chat_logo.png'
+import LoginForm from '../../components/Login/'
 function loginBox({ dispatch, login }) {
   // const [loginShow, setLoginShow] = useState(true)
   const LoginFormProps = {

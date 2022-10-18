@@ -7,14 +7,14 @@ export default {
 
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
-      history.listen(location => {
-        // console.log(location);
-        if(location.pathname === '/') {
-          dispatch({
-            type: 'demo'
-          })
-        }
-      })
+      // history.listen(location => {
+      //   // console.log(location);
+      //   if(location.pathname === '/') {
+      //     dispatch({
+      //       type: 'demo'
+      //     })
+      //   }
+      // })
     },
   },
 
